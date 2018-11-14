@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>移动页面demo</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        a{color:inherit;text-decoration: none;}
+        /* color：inherit表示颜色是继承上面的颜色，出现下划线主要是在导航栏中才会有的，
+        取消下划线是text-decorarion:none */
+        ul,ol{list-style: none;}
+        /* 为了消除导航文字的前面的小点 */
+        header{
+            margin:10px;
+            position: relative;
+        }
+        header > button{
+            position:absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .nav2{
+            display: none;
+        }
+        /* 上面隐藏的程序段只能位于下面PC端界面显示函数之上 */
+        .logo{
+            width: 60px;
+            height: 60px;
+            background: grey;
+            border-radius: 50%;
+        }
+        .clearfix::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .nav > li{
+            float: left;
+        }
+        /* 两个代码块实现的功能就是让导航从纵向分布的变为横向分布的 */
+        .nav {
+            display: none;
+            background: grey;
+            margin-top: 10px;
+        }
+        
+        .nav.active{
+            display: flex;
+            justify-content: space-between;
+            /* 如果使用clearfix的话，在进行居中排版的时候就会在末尾出现一个after占的位置
+            这个时候就可以直接使用flex进行排版，而不是使用clearfix的用法，在nav的class中就不使用clearfix */
+        }
+        @media(min-width:451px){
+            /* 在界面大于451px的时候是pc端，这个时候菜单按钮就隐藏 */
+            header > button{
+                display: none;
+            }
+            .nav, .nav.active{display: none;} 
+            /* !important是为了添加一个优先级，但是一般不推荐使用强制优先级，一般都是通过使用
+            开发信息来检查优先级*/
+            /* 加上上面这一句就是强制将手机上的菜单栏在屏幕扩大到PC端大小的时候进行隐藏 */
+            .nav2{display: block;}
+            header{
+                display: flex;
+            }
+            header >.nav2{
+                display: flex;
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+            header >.nav2>li{
+                margin: 0 10px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <div class="logo"></div>
+        <button id="xx">菜单</button>
+        <ul id="yy" class="nav">
+            <li><a href="#">导航1</a></li>
+            <li><a href="#">导航2</a></li>
+            <li><a href="#">导航3</a></li>
+            <li><a href="#">导航4</a></li>
+            <li><a href="#">导航5</a></li>
+        </ul>
+        <ul class="nav2">
+            <li><a href="#">导航1</a></li>
+            <li><a href="#">导航2</a></li>
+            <li><a href="#">导航3</a></li>
+            <li><a href="#">导航4</a></li>
+            <li><a href="#">导航5</a></li>
+        </ul>
+    </header>
+    <script>
+        xx.onclick = function(){
+            yy.classList.toggle('active')
+        }
+    </script>
+</body>
+</html>
